@@ -1,0 +1,78 @@
+# git submodule
+
+### 添加子模块
+
+添加子模块命令如下：
+
+```sh
+git submodule add https://github.com/user/Submodule.git libs/Submodule
+```
+
+- libs和Submodule目录可以不创建。
+- 目录和Submodule可以不同名，一般是同名。
+- 执行命令后自动拉取子模块代码。
+- 添加子模块后，直接commit，不需要add操作。
+
+添加子模块并指定分支
+使用 -b 选项来指定要跟踪的分支：
+
+```sh
+git submodule add -b <branch-name> <repository-url> <path>
+```
+
+### 切换子模块的分支
+
+切换子模块的分支
+
+```sh
+git config -f .gitmodules submodule.<submodule-path>.branch <branch-name>
+```
+
+- 例如：子模块comp/devmem2切换到test分支，git config -f .gitmodules submodule.comp/devmem2.branch test
+- 修改分支后，需要使用命令`git submodule update --remote`的更新。
+
+### 更新子模块
+
+这是更新子模块的基础命令。默认情况下，它将子模块更新到主仓库中记录的特定提交。
+
+```sh
+git submodule update
+```
+
+初始化并更新子模块（克隆仓库后）
+
+```sh
+git submodule update --init --recursive
+```
+
+- 克隆主仓库后，子仓库不会自动拉取，需要手动更新拉取。
+
+### 更新主仓库中的子模块引用
+
+更新所有子模块。
+
+```sh
+git submodule update --remote
+```
+
+更新指定子模块
+
+```sh
+git submodule update --remote libs/mylib
+```
+
+- --remote：这个选项告诉 Git 去获取子模块远程仓库中的最新提交，而不是仅更新到主仓库中记录的提交。
+- libs/mylib：这是子模块的路径。这个命令指定了要更新的具体子模块。
+- 需要git add libs/mylib，提交推送到主仓库，下次才会自动引用最新的子模块。
+- 其他仓库重新拉取主仓库提交后，需要执行`git submodule update`来更新子模块的。
+
+### 删除子模块
+
+删除子模块目录
+
+```
+git rm libs/mylib
+```
+
+从 .gitmodules 文件中删除子模块条目：
+编辑 .gitmodules 文件，删除相关条目。

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>git submodule &mdash; 文档 latest 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=1f19b280"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="Welcome to blitzin’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            文档
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">git submodule</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">添加子模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">切换子模块的分支</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">更新子模块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">更新主仓库中的子模块引用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">删除子模块</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">文档</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">git submodule</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/submodule.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="git-submodule">
+<h1>git submodule<a class="headerlink" href="#git-submodule" title="此标题的永久链接"></a></h1>
+<section id="id1">
+<h2>添加子模块<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h2>
+<p>添加子模块命令如下：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/user/Submodule.git<span class="w"> </span>libs/Submodule
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>libs和Submodule目录可以不创建。</p></li>
+<li><p>目录和Submodule可以不同名，一般是同名。</p></li>
+<li><p>执行命令后自动拉取子模块代码。</p></li>
+<li><p>添加子模块后，直接commit，不需要add操作。</p></li>
+</ul>
+<p>添加子模块并指定分支
+使用 -b 选项来指定要跟踪的分支：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>-b<span class="w"> </span>&lt;branch-name&gt;<span class="w"> </span>&lt;repository-url&gt;<span class="w"> </span>&lt;path&gt;
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>切换子模块的分支<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h2>
+<p>切换子模块的分支</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>-f<span class="w"> </span>.gitmodules<span class="w"> </span>submodule.&lt;submodule-path&gt;.branch<span class="w"> </span>&lt;branch-name&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>例如：子模块comp/devmem2切换到test分支，git config -f .gitmodules submodule.comp/devmem2.branch test</p></li>
+<li><p>修改分支后，需要使用命令<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--remote</span></code>的更新。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>更新子模块<a class="headerlink" href="#id3" title="此标题的永久链接"></a></h2>
+<p>这是更新子模块的基础命令。默认情况下，它将子模块更新到主仓库中记录的特定提交。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>update
+</pre></div>
+</div>
+<p>初始化并更新子模块（克隆仓库后）</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>克隆主仓库后，子仓库不会自动拉取，需要手动更新拉取。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>更新主仓库中的子模块引用<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h2>
+<p>更新所有子模块。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote
+</pre></div>
+</div>
+<p>更新指定子模块</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote<span class="w"> </span>libs/mylib
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>–remote：这个选项告诉 Git 去获取子模块远程仓库中的最新提交，而不是仅更新到主仓库中记录的提交。</p></li>
+<li><p>libs/mylib：这是子模块的路径。这个命令指定了要更新的具体子模块。</p></li>
+<li><p>需要git add libs/mylib，提交推送到主仓库，下次才会自动引用最新的子模块。</p></li>
+<li><p>其他仓库重新拉取主仓库提交后，需要执行<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span></code>来更新子模块的。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>删除子模块<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h2>
+<p>删除子模块目录</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">rm</span> <span class="n">libs</span><span class="o">/</span><span class="n">mylib</span>
+</pre></div>
+</div>
+<p>从 .gitmodules 文件中删除子模块条目：
+编辑 .gitmodules 文件，删除相关条目。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to blitzin’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, blitzin。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
